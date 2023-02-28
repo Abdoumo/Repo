@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="inventory_report" model="ir.actions.report">
+            <field name="name">Report Product List</field>
+            <field name="model">product.template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">abdou_reports.report_inventory_product_list</field>
+            <field name="report_file">abdou_reports.report_inventory_product_list</field>
+            <field name="print_report_name">'product form'</field>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="binding_type">report</field>
+        </record>
+        <template id="report_inventory_product_list">
+            <t t-call="web.basic_layout">
+                <t t-call="web.html_container">
+                    <h2>Product List</h2>
+
+                    <t t-set="counter_variable" t-value="0"/>
+                    <t t-foreach="docs" t-as="product">
+                        <div class="page">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Internal Reference</th>
+                                        <th scope="col">Barcode</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Unit of Measure</th>
+                                        <th scope="col">Quantity On Hand</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="counter_variable" t-value="counter_variable + 1"/>
+
+                                    <tr>
+                                        <td>
+                                            <span t-esc="counter_variable"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="product.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="product.default_code"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="product.barcode"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="product.categ_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="product.uom_name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="product.qty_available"/>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div style="page-break-before: always;">
+                                <br/>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

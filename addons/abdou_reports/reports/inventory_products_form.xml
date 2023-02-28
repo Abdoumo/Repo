@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inventory_products_form" model="ir.actions.report">
+            <field name="name">Report Product Form</field>
+            <field name="model">product.template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">abdou_reports.inventory_products_form_template</field>
+            <field name="report_file">abdou_reports.inventory_products_form_template</field>
+            <field name="print_report_name">'Fiche Téchnique des produits'</field>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="binding_type">report</field>
+        </record>
+        <template id="inventory_products_form_template">
+<t t-set="counter_variable" t-value="0"/>
+                <t t-call="web.external_layout">
+                    <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="product">
+            <t t-set="counter_variable" t-value="counter_variable + 1"/>
+                        <h2>Product Form</h2>
+                        <div class="header">
+                            <div class="row">
+                                <div class="col-xs-3">
+
+                                </div>
+                                <div class="col-xs-9 text-right" style="margin-top:20px;">
+                                    <h5>Custom Header</h5>
+                                </div>
+                            </div>
+                            <div class="row zero_min_height">
+                                <div class="col-xs-12">
+                                    <div style="border-bottom: 1px solid black;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page">
+                            <div class="card" style="width: 45rem; box-shadow: inset 0 0 1em #0d0d0a1c, 0 0 2em #4747471a;">
+                                <div id="bottom" class="card-body border border-dark">
+                                    <div class="row mb-2">
+                                        <div class="col-4 fw-bold">Product Name</div>
+                                        <div class="col-8">
+                                            <span t-field="product.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4">Internal Reference</div>
+                                        <div class="col-8">
+                                            <span t-field="product.default_code"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4 fw-bold">Barcode</div>
+                                        <div class="col-8">
+                                            <span t-field="product.barcode"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4 fw-bold">Category</div>
+                                        <div class="col-8">
+                                            <span t-field="product.categ_id.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4 fw-bold">Unit of Measure</div>
+                                        <div class="col-8">
+                                            <span t-field="product.uom_name"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4 fw-bold">Quantity On Hand</div>
+                                        <div class="col-8">
+                                            <span t-field="product.qty_available"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                        <t t-if="o and 'company_id' in o">
+                            <t t-set="company" t-value="o.company_id"></t>
+                        </t>
+                        <t t-if="not o or not 'company_id' in o">
+                            <t t-set="companyEmail" t-value="res_company.email"></t>
+                            <t t-set="companyPhone" t-value="res_company.phone"></t>
+                            <t t-set="companyStreet" t-value="res_company.street"></t>
+                        </t>
+
+                            <div class="text-center" style="border-top: 1px solid black;">
+                                <ul class="list-inline">
+
+                                    <li>Developed By: Aboud le blue</li>
+                                    <li>street : <t t-esc="companyStreet"/></li>
+                                    <li>Email : <t t-esc="companyEmail"/></li>
+                                    <li>Phone: <t t-esc="companyPhone"/></li>
+                                </ul>
+
+                                <ul class="list-inline">
+                                    <li>Page:</li>
+                                    <li>
+                                        <span class="page"><t t-esc="counter_variable"/></span>
+                                    </li>
+                                    <li>/</li>
+                                    <li>
+                                        <span class="topage"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>    
+                        
+                        <!-- <span t-field="company"/> -->
+
+                        <div style="page-break-before: always;">
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+{
+    "python.defaultInterpreterPath": "/odoo/src/15.0/venv/bin/python",
+    "python.autoComplete.extraPaths": [
+        "/odoo/src/15.0/community/addons",
+        "/odoo/src/15.0/community",
+        "/odoo/src/15.0/community/odoo/addons",
+        "${workspaceRoot}"
+    ],
+    "python.formatting.provider": "autopep8",
+    "python.analysis.extraPaths": [
+        "/odoo/src/15.0/community/addons",
+        "/odoo/src/15.0/community",
+        "/odoo/src/15.0/community/odoo/addons",
+        "${workspaceRoot}"
+    ],
+}
+
